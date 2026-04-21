@@ -1,0 +1,67 @@
+---
+import "../styles/theme.css";
+import "../styles/global.css";
+import Navbar from "../components/navbar.astro";
+import FooterSection from "../components/footer-section.astro";
+
+import { ClientRouter } from "astro:transitions";
+import { fade } from 'astro:transitions';
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogAlt?: string;
+}
+
+const { title, description, ogImage, ogAlt } = Astro.props;
+
+const canonicalURL = Astro.url.href;
+const siteName = "Animated Astro";
+const pageTitle = Astro.url.pathname === "/" ? title : `${title} · ${siteName}`;
+---
+
+<!doctype html>
+<html lang="en" class="dark" transition:animate="none">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d1117" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={siteName} />
+    <meta
+      property="og:image"
+      content={ogImage ?? `${Astro.url.origin}/og/default.png`}
+    />
+    <meta
+      property="og:image:alt"
+      content={ogAlt ?? `${siteName} — scroll-driven animations`}
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <title>{pageTitle}</title>
+
+    <ClientRouter />
+  </head>
+  <body transition:animate={fade({ duration: '0.4s' })}>
+    <Navbar />
+    <slot />
+    <FooterSection />
+  </body>
+</html>

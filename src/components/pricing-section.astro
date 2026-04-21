@@ -1,0 +1,25 @@
+<!-- ── PRICING ── -->
+<section class="sec sec-pricing" id="pricing">
+  <div class="sec-inner">
+    <p class="sec-tag">Pricing</p>
+    <h2 class="sec-title">Simple Pricing</h2>
+    <p class="sec-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+    <div class="pricing-grid">
+      {[
+        { name: 'Starter', price: '$9', desc: 'Lorem ipsum dolor sit amet consectetur.', features: ['Lorem ipsum feature', 'Consectetur adipiscing', 'Sed do eiusmod', 'Ut labore et dolore'], featured: false },
+        { name: 'Pro', price: '$29', desc: 'Ut enim ad minim veniam quis nostrud exercitation.', features: ['All Starter features', 'Ullamco laboris nisi', 'Ex ea commodo consequat', 'Duis aute irure dolor', 'In reprehenderit voluptate'], featured: true },
+        { name: 'Enterprise', price: '$99', desc: 'Excepteur sint occaecat cupidatat non proident.', features: ['All Pro features', 'Sunt in culpa officia', 'Deserunt mollit anim', 'Id est laborum lorem', 'Priority support'], featured: false },
+      ].map(p => (
+        <div class={`pricing-card${p.featured ? ' featured' : ''}`}>
+          <p class="plan-name">{p.name}</p>
+          <div class="pricing-price">{p.price}<sub>/mo</sub></div>
+          <p class="pricing-desc">{p.desc}</p>
+          <ul class="pricing-features">
+            {p.features.map(f => <li>{f}</li>)}
+          </ul>
+          <a href="#cta" class={`btn ${p.featured ? 'btn-primary' : 'btn-outline'}`}>Get Started</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

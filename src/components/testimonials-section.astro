@@ -1,0 +1,44 @@
+---
+const testimonials = [
+  { bg: '#1e3a5f', av: '#2563eb', name: 'Lorem Ipsum',       role: 'CEO at Dolor Inc.',        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.' },
+  { bg: '#2d1a4f', av: '#7c3aed', name: 'Amet Consectetur',  role: 'CTO at Adipiscing',         quote: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.' },
+  { bg: '#0a3d2a', av: '#059669', name: 'Sed Do Eiusmod',    role: 'Designer at Tempor',        quote: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' },
+  { bg: '#3d2a0a', av: '#d97706', name: 'Incididunt Labore', role: 'Engineer at Dolore',        quote: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.' },
+  { bg: '#0a2d3d', av: '#0891b2', name: 'Magna Aliqua',      role: 'Head of Ut Enim',           quote: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.' },
+  { bg: '#3d0a2a', av: '#e11d48', name: 'Quis Nostrud',      role: 'Product at Exercitation',   quote: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed.' },
+  { bg: '#0a3d3d', av: '#0d9488', name: 'Ullamco Laboris',   role: 'Founder at Nisi',           quote: 'Ut labore et dolore magnam aliquam quaerat voluptatem ut enim ad minima veniam quis nostrum.' },
+  { bg: '#2a3d0a', av: '#65a30d', name: 'Aliquip Commodo',   role: 'Lead at Ex Ea',             quote: 'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.' },
+  { bg: '#1a0a3d', av: '#6d28d9', name: 'Consequat Duis',    role: 'Dev at Aute Irure',         quote: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.' },
+  { bg: '#0a3d1a', av: '#16a34a', name: 'Dolor Reprehend',   role: 'VP at Voluptate',           quote: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus.' },
+  { bg: '#3d1a0a', av: '#ea580c', name: 'Velit Esse Cillum', role: 'Dir. at Dolore',            quote: 'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet.' },
+  { bg: '#0a1a3d', av: '#1d4ed8', name: 'Fugiat Nulla',      role: 'Advisor at Pariatur',       quote: 'Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis voluptatibus maiores.' },
+];
+---
+
+<!-- ── TESTIMONIALS ── -->
+<section class="sec sec-testimonials" id="testimonials">
+  <div class="sec-inner">
+    <p class="sec-tag">06 / Testimonials</p>
+    <h2 class="sec-title">What They Say</h2>
+    <p class="sec-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt. Click any card — surrounding ones make way.</p>
+    <div class="tmg-wrap">
+      <div class="tmg-grid"
+        data-duration="0.85"
+        data-ease="elastic.out(0.4,0.3)"
+        data-scale="2.15"
+        data-max-rotation="22"
+        data-spread="170"
+        data-max-distance="780">
+        {testimonials.map(t => (
+          <div class="tmg-item" style={`--card-bg: ${t.bg}`}>
+            <div class="tmg-avatar" style={`background: ${t.av}`}></div>
+            <div class="tmg-name">{t.name}</div>
+            <div class="tmg-role">{t.role}</div>
+            <p class="tmg-quote">{t.quote}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <p class="tmg-hint">Click a card to expand · Click again to collapse</p>
+  </div>
+</section>

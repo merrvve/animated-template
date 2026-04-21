@@ -1,0 +1,134 @@
+<!-- ── STAGE (Hero → About → Features → Pricing → CTA) ── -->
+<section class="stage" id="hero">
+  <div class="layers">
+
+    <!-- Layer 0: Hero base — always visible, no mask -->
+    <svg class="layer" id="layer0" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <rect x="0" y="0" width="200" height="100" fill="#0d1117"/>
+    </svg>
+
+    <!-- Layer 1: About -->
+    <svg class="layer" id="layer1" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask1" maskUnits="userSpaceOnUse">
+          <rect id="maskbg1" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds1"></g>
+        </mask>
+      </defs>
+      <rect id="crect1" x="0" y="0" width="200" height="100" fill="#0a1e3f" mask="url(#mask1)"/>
+    </svg>
+
+    <!-- Layer 2: Features -->
+    <svg class="layer" id="layer2" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask2" maskUnits="userSpaceOnUse">
+          <rect id="maskbg2" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds2"></g>
+        </mask>
+      </defs>
+      <rect id="crect2" x="0" y="0" width="200" height="100" fill="#0a2818" mask="url(#mask2)"/>
+    </svg>
+
+    <!-- Layer 3: Pricing -->
+    <svg class="layer" id="layer3" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask3" maskUnits="userSpaceOnUse">
+          <rect id="maskbg3" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds3"></g>
+        </mask>
+      </defs>
+      <rect id="crect3" x="0" y="0" width="200" height="100" fill="#1a0a38" mask="url(#mask3)"/>
+    </svg>
+
+    <!-- Layer 4: CTA -->
+    <svg class="layer" id="layer4" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask4" maskUnits="userSpaceOnUse">
+          <rect id="maskbg4" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds4"></g>
+        </mask>
+      </defs>
+      <rect id="crect4" x="0" y="0" width="200" height="100" fill="#380a0a" mask="url(#mask4)"/>
+    </svg>
+
+    <!-- Progress bar -->
+    <div class="progress-bar">
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+    </div>
+
+    <!-- Text overlays -->
+    <div class="texts">
+      <div class="txt active">
+        <p class="section-label">01 / Hero</p>
+        <h1>Lorem<br>Ipsum</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">02 / About</p>
+        <h1>About<br>Us</h1>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">03 / Features</p>
+        <h1>What We<br>Offer</h1>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">04 / Pricing</p>
+        <h1>Simple<br>Pricing</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">05 / Get Started</p>
+        <h1>Start<br>Today</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula ligula et risus scelerisque, non tincidunt nisi.</p>
+      </div>
+    </div>
+
+    <!-- Pricing cards overlay — shown when pricing layer is active -->
+    <div class="pricing-stage-cards">
+      <div class="pricing-card">
+        <p class="plan-name">Starter</p>
+        <div class="pricing-price">$9<sub>/mo</sub></div>
+        <p class="pricing-desc">Lorem ipsum dolor sit amet consectetur.</p>
+        <ul class="pricing-features">
+          <li>Lorem ipsum feature</li>
+          <li>Consectetur adipiscing</li>
+          <li>Sed do eiusmod</li>
+          <li>Ut labore et dolore</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline">Get Started</a>
+      </div>
+      <div class="pricing-card featured">
+        <p class="plan-name">Pro</p>
+        <div class="pricing-price">$29<sub>/mo</sub></div>
+        <p class="pricing-desc">Ut enim ad minim veniam quis nostrud exercitation.</p>
+        <ul class="pricing-features">
+          <li>All Starter features</li>
+          <li>Ullamco laboris nisi</li>
+          <li>Ex ea commodo consequat</li>
+          <li>Duis aute irure dolor</li>
+          <li>In reprehenderit voluptate</li>
+        </ul>
+        <a href="#cta" class="btn btn-primary">Get Started</a>
+      </div>
+      <div class="pricing-card">
+        <p class="plan-name">Enterprise</p>
+        <div class="pricing-price">$99<sub>/mo</sub></div>
+        <p class="pricing-desc">Excepteur sint occaecat cupidatat non proident.</p>
+        <ul class="pricing-features">
+          <li>All Pro features</li>
+          <li>Sunt in culpa officia</li>
+          <li>Deserunt mollit anim</li>
+          <li>Id est laborum lorem</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="#cta" class="btn btn-outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
