@@ -2,11 +2,63 @@
 <nav class="navbar">
   <div class="nav-brand">Astro</div>
   <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/features">Features</a></li>
-    <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><a class="link link--kukuri" href="/" data-letters="Home">Home</a></li>
+    <li><a class="link link--kukuri" href="/about" data-letters="About">About</a></li>
+    <li><a class="link link--kukuri" href="/features" data-letters="Features">Features</a></li>
+    <li><a class="link link--kukuri" href="/pricing" data-letters="Pricing">Pricing</a></li>
+    <li><a class="link link--kukuri" href="/contact" data-letters="Contact">Contact</a></li>
   </ul>
   <a class="nav-cta" href="#cta">Get Started</a>
 </nav>
+
+<style>
+  .link {
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: #9e9ba4;
+    display: inline-block;
+  }
+
+  .link--kukuri {
+    overflow: hidden;
+    line-height: 0.75;
+    color: #c5c2b8;
+  }
+
+  .link--kukuri:hover {
+    color: #c5c2b8;
+  }
+
+  .link--kukuri::after {
+    content: '';
+    position: absolute;
+    height: 16px;
+    width: 100%;
+    top: 50%;
+    margin-top: -8px;
+    right: 0;
+    background: #F9F9F9;
+    transform: translate3d(-100%, 0, 0);
+    transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
+  .link--kukuri:hover::after {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  .link--kukuri::before {
+    content: attr(data-letters);
+    position: absolute;
+    z-index: 2;
+    overflow: hidden;
+    color: var(--green-9);
+    white-space: nowrap;
+    width: 0%;
+    transition: width 0.4s 0.3s;
+  }
+
+  .link--kukuri:hover::before {
+    width: 100%;
+  }
+</style>
