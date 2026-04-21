@@ -1,17 +1,1009 @@
 ---
-
+const testimonials = [
+  { bg: '#1e3a5f', av: '#2563eb', name: 'Lorem Ipsum',       role: 'CEO at Dolor Inc.',        quote: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.' },
+  { bg: '#2d1a4f', av: '#7c3aed', name: 'Amet Consectetur',  role: 'CTO at Adipiscing',         quote: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.' },
+  { bg: '#0a3d2a', av: '#059669', name: 'Sed Do Eiusmod',    role: 'Designer at Tempor',        quote: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.' },
+  { bg: '#3d2a0a', av: '#d97706', name: 'Incididunt Labore', role: 'Engineer at Dolore',        quote: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.' },
+  { bg: '#0a2d3d', av: '#0891b2', name: 'Magna Aliqua',      role: 'Head of Ut Enim',           quote: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.' },
+  { bg: '#3d0a2a', av: '#e11d48', name: 'Quis Nostrud',      role: 'Product at Exercitation',   quote: 'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet consectetur adipisci velit sed.' },
+  { bg: '#0a3d3d', av: '#0d9488', name: 'Ullamco Laboris',   role: 'Founder at Nisi',           quote: 'Ut labore et dolore magnam aliquam quaerat voluptatem ut enim ad minima veniam quis nostrum.' },
+  { bg: '#2a3d0a', av: '#65a30d', name: 'Aliquip Commodo',   role: 'Lead at Ex Ea',             quote: 'Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae.' },
+  { bg: '#1a0a3d', av: '#6d28d9', name: 'Consequat Duis',    role: 'Dev at Aute Irure',         quote: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.' },
+  { bg: '#0a3d1a', av: '#16a34a', name: 'Dolor Reprehend',   role: 'VP at Voluptate',           quote: 'Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus.' },
+  { bg: '#3d1a0a', av: '#ea580c', name: 'Velit Esse Cillum', role: 'Dir. at Dolore',            quote: 'Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet.' },
+  { bg: '#0a1a3d', av: '#1d4ed8', name: 'Fugiat Nulla',      role: 'Advisor at Pariatur',       quote: 'Itaque earum rerum hic tenetur a sapiente delectus ut aut reiciendis voluptatibus maiores.' },
+];
 ---
-
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="generator" content={Astro.generator} />
+  <title>Animated Astro</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d1117;
+      color: #fff;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(13, 17, 23, 0.65);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.25rem;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      padding: 0.5rem 1.3rem;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.82; }
+
+    /* ── STAGE ── */
+    .stage {
+      height: 600vh;
+      position: relative;
+    }
+
+    .layers {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .layer {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .segment {
+      width: 2px;
+      height: 52px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .segment .fill {
+      width: 100%;
+      height: 0%;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    /* ── TEXTS ── */
+    .texts {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .txt {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 4rem;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      max-width: 620px;
+    }
+
+    .txt.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .txt .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0.9rem;
+    }
+
+    .txt h1 {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .txt p {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.55);
+      max-width: 380px;
+    }
+
+    /* ── SECTIONS BELOW STAGE ── */
+    .sec {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 4rem;
+    }
+
+    .sec-inner {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .sec-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1rem;
+    }
+
+    .sec-title {
+      font-size: clamp(2rem, 5vw, 3.75rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .sec-text {
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 560px;
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Features */
+    .sec-features { background: #0a2818; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 2rem 1.75rem;
+    }
+
+    .feature-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      margin-bottom: 1.25rem;
+    }
+
+    .feature-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .feature-card p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+    }
+
+    /* Pricing */
+    .sec-pricing { background: #1a0a38; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 2.5rem;
+    }
+
+    .pricing-card.featured {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .pricing-card .plan-name {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 0.75rem;
+    }
+
+    .pricing-price {
+      font-size: 3.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-price sub {
+      font-size: 1rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .pricing-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-features li {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.04em;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.8; }
+    .btn-primary { background: #fff; color: #000; }
+    .btn-outline { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); }
+
+    /* CTA */
+    .sec-cta {
+      background: #380a0a;
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .sec-cta .sec-inner { text-align: center; }
+    .sec-cta .sec-text { margin: 0 auto 3rem; }
+
+    .cta-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── TESTIMONIALS ── */
+    .sec-testimonials {
+      background: #0d1117;
+      padding: 8rem 4rem 10rem;
+      overflow: visible;
+    }
+
+    .tmg-wrap {
+      overflow: hidden;
+      margin: 3rem -1rem 0;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .tmg-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      position: relative;
+    }
+
+    .tmg-item {
+      background: var(--card-bg, #1e3a5f);
+      border-radius: 14px;
+      padding: 1.5rem 1.25rem;
+      cursor: pointer;
+      position: relative;
+      will-change: transform;
+      user-select: none;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: box-shadow 0.25s;
+      transform-origin: center center;
+    }
+
+    .tmg-item:hover {
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .tmg-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-bottom: 0.25rem;
+    }
+
+    .tmg-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .tmg-role {
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .tmg-quote {
+      font-size: 0.78rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.65);
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: auto;
+    }
+
+    .tmg-hint {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 1000px) {
+      .tmg-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 680px) {
+      .tmg-grid { grid-template-columns: repeat(2, 1fr); }
+      .sec-testimonials { padding: 6rem 2rem 8rem; }
+    }
+
+    /* Footer */
+    .footer {
+      background: #000;
+      padding: 5rem 4rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+    }
+
+    .footer-brand {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col li { margin-bottom: 0.65rem; }
+
+    .footer-col a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: #fff; }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-bottom p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .txt { left: 2rem; }
+      .sec { padding: 6rem 2rem; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 540px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer { padding: 4rem 2rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="nav-brand">Astro</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">Get Started</a>
+</nav>
+
+<!-- ── STAGE (Hero → About → Features → Pricing → CTA) ── -->
+<section class="stage" id="hero">
+  <div class="layers">
+
+    <!-- Layer 0: Hero base — always visible, no mask -->
+    <svg class="layer" id="layer0" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <rect x="0" y="0" width="200" height="100" fill="#0d1117"/>
+    </svg>
+
+    <!-- Layer 1: About -->
+    <svg class="layer" id="layer1" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask1" maskUnits="userSpaceOnUse">
+          <rect id="maskbg1" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds1"></g>
+        </mask>
+      </defs>
+      <rect id="crect1" x="0" y="0" width="200" height="100" fill="#0a1e3f" mask="url(#mask1)"/>
+    </svg>
+
+    <!-- Layer 2: Features -->
+    <svg class="layer" id="layer2" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask2" maskUnits="userSpaceOnUse">
+          <rect id="maskbg2" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds2"></g>
+        </mask>
+      </defs>
+      <rect id="crect2" x="0" y="0" width="200" height="100" fill="#0a2818" mask="url(#mask2)"/>
+    </svg>
+
+    <!-- Layer 3: Pricing -->
+    <svg class="layer" id="layer3" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask3" maskUnits="userSpaceOnUse">
+          <rect id="maskbg3" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds3"></g>
+        </mask>
+      </defs>
+      <rect id="crect3" x="0" y="0" width="200" height="100" fill="#1a0a38" mask="url(#mask3)"/>
+    </svg>
+
+    <!-- Layer 4: CTA -->
+    <svg class="layer" id="layer4" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <mask id="mask4" maskUnits="userSpaceOnUse">
+          <rect id="maskbg4" x="0" y="0" width="200" height="100" fill="black"/>
+          <g id="blinds4"></g>
+        </mask>
+      </defs>
+      <rect id="crect4" x="0" y="0" width="200" height="100" fill="#380a0a" mask="url(#mask4)"/>
+    </svg>
+
+    <!-- Progress bar -->
+    <div class="progress-bar">
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+      <div class="segment"><div class="fill"></div></div>
+    </div>
+
+    <!-- Text overlays -->
+    <div class="texts">
+      <div class="txt active">
+        <p class="section-label">01 / Hero</p>
+        <h1>Lorem<br>Ipsum</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">02 / About</p>
+        <h1>About<br>Us</h1>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">03 / Features</p>
+        <h1>What We<br>Offer</h1>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">04 / Pricing</p>
+        <h1>Simple<br>Pricing</h1>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur.</p>
+      </div>
+      <div class="txt">
+        <p class="section-label">05 / Get Started</p>
+        <h1>Start<br>Today</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula ligula et risus scelerisque, non tincidunt nisi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="sec sec-features" id="features">
+  <div class="sec-inner">
+    <p class="sec-tag">03 / Features</p>
+    <h2 class="sec-title">What We Offer</h2>
+    <p class="sec-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.</p>
+    <div class="features-grid">
+      {[
+        { color: '#1e3a5f', title: 'Feature Alpha', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.' },
+        { color: '#3d1a4f', title: 'Feature Beta', desc: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.' },
+        { color: '#1a3d1a', title: 'Feature Gamma', desc: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.' },
+        { color: '#3d2a0a', title: 'Feature Delta', desc: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.' },
+        { color: '#1a1a3d', title: 'Feature Epsilon', desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vehicula ligula et risus scelerisque.' },
+        { color: '#3d1a1a', title: 'Feature Zeta', desc: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.' },
+      ].map(f => (
+        <div class="feature-card">
+          <div class="feature-icon" style={`background: ${f.color}`}></div>
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="sec sec-pricing" id="pricing">
+  <div class="sec-inner">
+    <p class="sec-tag">04 / Pricing</p>
+    <h2 class="sec-title">Simple Pricing</h2>
+    <p class="sec-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</p>
+    <div class="pricing-grid">
+      {[
+        { name: 'Starter', price: '$9', desc: 'Lorem ipsum dolor sit amet consectetur.', features: ['Lorem ipsum feature', 'Consectetur adipiscing', 'Sed do eiusmod', 'Ut labore et dolore'], featured: false },
+        { name: 'Pro', price: '$29', desc: 'Ut enim ad minim veniam quis nostrud exercitation.', features: ['All Starter features', 'Ullamco laboris nisi', 'Ex ea commodo consequat', 'Duis aute irure dolor', 'In reprehenderit voluptate'], featured: true },
+        { name: 'Enterprise', price: '$99', desc: 'Excepteur sint occaecat cupidatat non proident.', features: ['All Pro features', 'Sunt in culpa officia', 'Deserunt mollit anim', 'Id est laborum lorem', 'Priority support'], featured: false },
+      ].map(p => (
+        <div class={`pricing-card${p.featured ? ' featured' : ''}`}>
+          <p class="plan-name">{p.name}</p>
+          <div class="pricing-price">{p.price}<sub>/mo</sub></div>
+          <p class="pricing-desc">{p.desc}</p>
+          <ul class="pricing-features">
+            {p.features.map(f => <li>{f}</li>)}
+          </ul>
+          <a href="#cta" class={`btn ${p.featured ? 'btn-primary' : 'btn-outline'}`}>Get Started</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="sec sec-cta" id="cta">
+  <div class="sec-inner">
+    <p class="sec-tag">05 / Get Started</p>
+    <h2 class="sec-title">Ready to Begin?</h2>
+    <p class="sec-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn btn-primary">Start Free Trial</a>
+      <a href="#" class="btn btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="sec sec-testimonials" id="testimonials">
+  <div class="sec-inner">
+    <p class="sec-tag">06 / Testimonials</p>
+    <h2 class="sec-title">What They Say</h2>
+    <p class="sec-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt. Click any card — surrounding ones make way.</p>
+    <div class="tmg-wrap">
+      <div class="tmg-grid"
+        data-duration="0.85"
+        data-ease="elastic.out(0.4,0.3)"
+        data-scale="2.15"
+        data-max-rotation="22"
+        data-spread="170"
+        data-max-distance="780">
+        {testimonials.map(t => (
+          <div class="tmg-item" style={`--card-bg: ${t.bg}`}>
+            <div class="tmg-avatar" style={`background: ${t.av}`}></div>
+            <div class="tmg-name">{t.name}</div>
+            <div class="tmg-role">{t.role}</div>
+            <p class="tmg-quote">{t.quote}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <p class="tmg-hint">Click a card to expand · Click again to collapse</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer" id="contact">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Astro</div>
+      <p class="footer-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <ul>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Changelog</a></li>
+        <li><a href="#">Roadmap</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+        <li><a href="#">Cookies</a></li>
+        <li><a href="#">Security</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Astro. All rights reserved.</p>
+    <p>Lorem ipsum dolor sit amet.</p>
+  </div>
+</footer>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import Lenis from 'lenis';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── CONFIG ──────────────────────────────────────
+  const BLIND_COUNT = 24;
+  const VB_HEIGHT = 100;
+  const MASKED_LAYERS = [1, 2, 3, 4];
+  const TOTAL_SECTIONS = 5;
+  // Text switches at these scroll progress thresholds
+  const TEXT_THRESHOLDS = [0, 0.125, 0.375, 0.625, 0.875];
+
+  let vbWidth = calcVbWidth();
+  let masterTl: gsap.core.Timeline;
+  const blindsData: Record<number, Array<{ top: SVGRectElement; bottom: SVGRectElement; y: number; h: number }>> = {};
+
+  function calcVbWidth() {
+    return (window.innerWidth / window.innerHeight) * VB_HEIGHT;
+  }
+
+  // ── SVG HELPERS ─────────────────────────────────
+  function setSvgViewBox(idx: number) {
+    const svg = document.getElementById(`layer${idx}`) as SVGSVGElement | null;
+    svg?.setAttribute('viewBox', `0 0 ${vbWidth} ${VB_HEIGHT}`);
+  }
+
+  function updateSvgWidths(idx: number) {
+    const svg = document.getElementById(`layer${idx}`);
+    svg?.querySelectorAll('rect').forEach(r => r.setAttribute('width', String(vbWidth + 1)));
+  }
+
+  function createBlinds(layerIdx: number) {
+    const gEl = document.getElementById(`blinds${layerIdx}`)!;
+    while (gEl.firstChild) gEl.removeChild(gEl.firstChild);
+
+    const h = VB_HEIGHT / BLIND_COUNT;
+    const blinds: typeof blindsData[number] = [];
+    const ns = 'http://www.w3.org/2000/svg';
+
+    for (let i = 0; i < BLIND_COUNT; i++) {
+      const centerY = VB_HEIGHT - (i * h + h / 2);
+
+      const makeRect = () => {
+        const r = document.createElementNS(ns, 'rect') as SVGRectElement;
+        r.setAttribute('x', '0');
+        r.setAttribute('y', String(centerY));
+        r.setAttribute('width', String(vbWidth + 1));
+        r.setAttribute('height', '0');
+        r.setAttribute('fill', 'white');
+        r.setAttribute('shape-rendering', 'crispEdges');
+        gEl.appendChild(r);
+        return r;
+      };
+
+      blinds.push({ top: makeRect(), bottom: makeRect(), y: centerY, h });
+    }
+
+    blindsData[layerIdx] = blinds;
+    return blinds;
+  }
+
+  function buildOpenTimeline(blinds: typeof blindsData[number]) {
+    const rects = blinds.flatMap(b => [b.top, b.bottom]);
+
+    return gsap.timeline().to(rects, {
+      attr: {
+        y: (i: number) => {
+          const b = blinds[Math.floor(i / 2)];
+          return i % 2 === 0 ? b.y - b.h : b.y;
+        },
+        height: (i: number) => {
+          const b = blinds[Math.floor(i / 2)];
+          return b.h + 0.01;
+        },
+      },
+      ease: 'none',
+      stagger: { each: 0.02, from: 'start' },
+      duration: 1,
+    });
+  }
+
+  // ── INIT ─────────────────────────────────────────
+  function init() {
+    vbWidth = calcVbWidth();
+
+    for (let i = 0; i <= 4; i++) {
+      setSvgViewBox(i);
+      updateSvgWidths(i);
+    }
+
+    masterTl = gsap.timeline({ paused: true });
+    MASKED_LAYERS.forEach(idx => {
+      masterTl.add(buildOpenTimeline(createBlinds(idx)), '>');
+    });
+
+    ScrollTrigger.create({
+      trigger: '.stage',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 2.2,
+      animation: masterTl,
+      onUpdate(self) {
+        updateProgressBar(self.progress);
+        updateActiveText(self.progress);
+      },
+    });
+  }
+
+  // ── UI UPDATES ───────────────────────────────────
+  function updateProgressBar(progress: number) {
+    const fills = document.querySelectorAll<HTMLElement>('.segment .fill');
+    const per = 1 / TOTAL_SECTIONS;
+    fills.forEach((fill, i) => {
+      const start = i * per;
+      const end = (i + 1) * per;
+      if (progress >= end) fill.style.height = '100%';
+      else if (progress >= start) fill.style.height = `${((progress - start) / per) * 100}%`;
+      else fill.style.height = '0%';
+    });
+  }
+
+  function updateActiveText(progress: number) {
+    let active = 0;
+    for (let i = TEXT_THRESHOLDS.length - 1; i >= 0; i--) {
+      if (progress >= TEXT_THRESHOLDS[i]) { active = i; break; }
+    }
+    document.querySelectorAll('.txt').forEach((el, i) => {
+      el.classList.toggle('active', i === active);
+    });
+  }
+
+  // ── RESIZE ───────────────────────────────────────
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+      vbWidth = calcVbWidth();
+      init();
+    }, 220);
+  });
+
+  // ── LENIS SMOOTH SCROLL ──────────────────────────
+  const lenis = new Lenis();
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time: number) => lenis.raf(time * 1000));
+  gsap.ticker.lagSmoothing(0);
+
+  init();
+
+  // ── MAKE WAY GRID ────────────────────────────────
+  function initMakeWayGrid() {
+    const grid = document.querySelector<HTMLElement>('.tmg-grid');
+    if (!grid) return;
+
+    const items = [...grid.querySelectorAll<HTMLElement>('.tmg-item')];
+    let activeItem: HTMLElement | null = null;
+
+    const cfg = {
+      duration:    parseFloat(grid.dataset.duration    ?? '0.85'),
+      ease:                   grid.dataset.ease        ?? 'elastic.out(0.4,0.3)',
+      scale:       parseFloat(grid.dataset.scale       ?? '2.15'),
+      maxRotation: parseFloat(grid.dataset.maxRotation ?? '22'),
+      spread:      parseFloat(grid.dataset.spread      ?? '170'),
+      maxDistance: parseFloat(grid.dataset.maxDistance ?? '780'),
+    };
+
+    // Store original layout centres (relative to grid) before any transforms.
+    const origins = new Map<HTMLElement, { x: number; y: number }>();
+    items.forEach(item => {
+      origins.set(item, {
+        x: item.offsetLeft + item.offsetWidth  / 2,
+        y: item.offsetTop  + item.offsetHeight / 2,
+      });
+    });
+
+    function resetAll(skip: HTMLElement | null = null) {
+      items.forEach(item => {
+        if (item === skip) return;
+        gsap.to(item, {
+          x: 0, y: 0, rotation: 0, scale: 1,
+          zIndex: 1,
+          duration: cfg.duration,
+          ease: cfg.ease,
+        });
+      });
+    }
+
+    function expand(item: HTMLElement) {
+      activeItem = item;
+      const cc = origins.get(item)!;
+
+      gsap.to(item, {
+        scale: cfg.scale,
+        zIndex: 100,
+        duration: cfg.duration,
+        ease: cfg.ease,
+      });
+
+      items.forEach(other => {
+        if (other === item) return;
+
+        const oc = origins.get(other)!;
+        const dx = oc.x - cc.x;
+        const dy = oc.y - cc.y;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist === 0 || dist > cfg.maxDistance) return;
+
+        const falloff = 1 - dist / cfg.maxDistance;
+        const moveX   = (dx / dist) * cfg.spread * falloff;
+        const moveY   = (dy / dist) * cfg.spread * falloff;
+        const rot     = (Math.random() * 2 - 1) * cfg.maxRotation * falloff;
+
+        gsap.to(other, {
+          x: moveX, y: moveY, rotation: rot,
+          duration: cfg.duration,
+          ease: cfg.ease,
+        });
+      });
+    }
+
+    grid.addEventListener('click', (e: MouseEvent) => {
+      const item = (e.target as Element).closest<HTMLElement>('.tmg-item');
+
+      if (!item) {
+        resetAll();
+        activeItem = null;
+        return;
+      }
+
+      if (item === activeItem) {
+        resetAll();
+        activeItem = null;
+        return;
+      }
+
+      resetAll(item);
+      expand(item);
+    });
+  }
+
+  initMakeWayGrid();
+</script>
+
+</body>
 </html>
