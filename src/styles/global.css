@@ -64,15 +64,14 @@ body {
 
 /* ── STAGE ── */
 .stage {
-  height: 600vh;
+  height: 100vh;
   position: relative;
 }
 
 .layers {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 

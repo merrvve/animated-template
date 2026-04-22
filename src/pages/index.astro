@@ -1,19 +1,17 @@
 ---
 import '../styles/global.css';
 import StageSection from '../components/stage-section.astro';
-import FeaturesSection from '../components/features-section.astro';
-import PricingSection from '../components/pricing-section.astro';
+import HowToUseSection from '../components/how-to-use-section.astro';
 import CTASection from '../components/cta-section.astro';
-import TestimonialsSection from '../components/testimonials-section.astro';
-import FooterSection from '../components/footer-section.astro';
-import Navbar from '../components/navbar.astro';
+
 import Base from '../layouts/Base.astro';
 ---
 <Base title="home" description="desc">
-  <Navbar />
+
 <StageSection />
+<HowToUseSection />
 <CTASection />
-<FooterSection />
+
 
 <script>
   import gsap from 'gsap';
@@ -118,7 +116,8 @@ import Base from '../layouts/Base.astro';
     ScrollTrigger.create({
       trigger: '.stage',
       start: 'top top',
-      end: 'bottom bottom',
+      end: '+=' + window.innerHeight * 5,
+      pin: true,
       scrub: 2.2,
       animation: masterTl,
       onUpdate(self) {
@@ -270,8 +269,11 @@ import Base from '../layouts/Base.astro';
     }, 220);
   });
 
-  // astro:page-load fires on initial load AND after every view-transition navigation
+  // astro:page-load fires after every view-transition navigation
   document.addEventListener('astro:page-load', setup);
+  // Also call immediately: ClientRouter fires astro:page-load during its own
+  // module init, which runs before this deferred script registers the listener.
+  setup();
 </script>
 
 

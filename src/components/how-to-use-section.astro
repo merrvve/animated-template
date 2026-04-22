@@ -1,0 +1,191 @@
+<!-- ── HOW TO USE ── -->
+<section class="sec sec-howto" id="how-it-works">
+  <div class="sec-inner">
+    <p class="sec-tag">How It Works</p>
+    <h2 class="sec-title">Up and Running<br>in Four Steps</h2>
+    <p class="sec-text">From sign-up to launch in minutes. No technical expertise required — just follow the steps.</p>
+
+    <div class="howto-grid stack-bouncygrid" id="howtoGrid">
+
+      <!-- Step 1 — top-left (first-child) -->
+      <div class="how-step">
+        <span class="how-step-num">01</span>
+        <div class="how-step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3 class="how-step-title">Create Account</h3>
+        <p class="how-step-desc">Sign up in seconds with your email. No credit card required to start your free trial.</p>
+      </div>
+
+      <!-- Step 2 — top-right (nth-child 2) -->
+      <div class="how-step">
+        <span class="how-step-num">02</span>
+        <div class="how-step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/>
+          </svg>
+        </div>
+        <h3 class="how-step-title">Set Up Your Space</h3>
+        <p class="how-step-desc">Configure your workspace and invite team members with a few clicks.</p>
+      </div>
+
+      <!-- Step 3 — bottom-left (nth-child 3) -->
+      <div class="how-step">
+        <span class="how-step-num">03</span>
+        <div class="how-step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
+        <h3 class="how-step-title">Connect &amp; Integrate</h3>
+        <p class="how-step-desc">Link your existing tools and data sources with one-click integrations.</p>
+      </div>
+
+      <!-- Step 4 — bottom-right (nth-child 4) -->
+      <div class="how-step">
+        <span class="how-step-num">04</span>
+        <div class="how-step-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+            <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+          </svg>
+        </div>
+        <h3 class="how-step-title">Go Live</h3>
+        <p class="how-step-desc">Launch your setup and start seeing real results from day one.</p>
+      </div>
+
+    </div>
+
+    <p class="howto-hint">Click a step to focus</p>
+  </div>
+</section>
+
+<style>
+  .sec-howto { background: var(--blue-2); }
+
+  .howto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-l);
+    margin-top: var(--space-3xl);
+  }
+
+  .how-step {
+    background: var(--white-a1);
+    border: 1px solid var(--white-a2);
+    border-radius: var(--radius-l);
+    padding: var(--space-2xl);
+    cursor: pointer;
+    position: relative;
+    will-change: transform;
+    user-select: none;
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+  }
+
+  .how-step:hover { box-shadow: 0 0 0 1px var(--white-a4); }
+
+  /* ── Bouncy Grid ── */
+  .howto-grid.active .how-step {
+    transform: scale(0.48);
+  }
+
+  .howto-grid.active .how-step:nth-child(4) { transform-origin: 0 0; }
+  .howto-grid.active .how-step:nth-child(3) { transform-origin: 100% 0; }
+  .howto-grid.active .how-step:nth-child(2) { transform-origin: 0 100%; }
+  .howto-grid.active .how-step:first-child  { transform-origin: 100% 100%; }
+
+  .howto-grid.active .how-step.expanded {
+    transform: scale(1);
+  }
+
+  .how-step-num {
+    display: block;
+    font-size: var(--step-5);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--white-a2);
+    line-height: 1;
+    margin-bottom: var(--space-l);
+  }
+
+  .how-step-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-m);
+    background: var(--white-a2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-l);
+    color: var(--color-text);
+  }
+
+  .how-step-title {
+    font-size: var(--step-1);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-s);
+  }
+
+  .how-step-desc {
+    font-size: var(--step--1);
+    color: var(--white-a6);
+    line-height: var(--line-height-body);
+  }
+
+  .howto-hint {
+    text-align: center;
+    margin-top: var(--space-2xl);
+    font-size: var(--step--1);
+    color: var(--white-a4);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 540px) {
+    .howto-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  function initHowtoGrid() {
+    const grid = document.getElementById('howtoGrid');
+    if (!grid) return;
+
+    const steps = [...grid.querySelectorAll<HTMLElement>('.how-step')];
+    let activeStep: HTMLElement | null = null;
+
+    grid.addEventListener('click', (e: MouseEvent) => {
+      const step = (e.target as Element).closest<HTMLElement>('.how-step');
+
+      if (!step) {
+        steps.forEach(s => s.classList.remove('expanded'));
+        grid.classList.remove('active');
+        activeStep = null;
+        return;
+      }
+
+      if (step === activeStep) {
+        step.classList.remove('expanded');
+        grid.classList.remove('active');
+        activeStep = null;
+        return;
+      }
+
+      steps.forEach(s => s.classList.remove('expanded'));
+      step.classList.add('expanded');
+      grid.classList.add('active');
+      activeStep = step;
+    });
+  }
+
+  document.addEventListener('astro:page-load', initHowtoGrid);
+</script>
